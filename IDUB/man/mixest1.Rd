@@ -8,7 +8,7 @@ This function estimates recursively mixtures with state-space components with a 
 }
 
 \usage{
-mixest1(y,x,mods=NULL,ftype=NULL,lambda=NULL,kappa=NULL,V=NULL,W=NULL,atype=NULL)
+mixest1(y,x,mods=NULL,ftype=NULL,lambda=NULL,kappa=NULL,V=NULL,W=NULL,atype=NULL,max_vars = NULL,)
 }
 
 \arguments{
@@ -21,6 +21,7 @@ mixest1(y,x,mods=NULL,ftype=NULL,lambda=NULL,kappa=NULL,V=NULL,W=NULL,atype=NULL
 \item{V}{optional, \code{\link[base]{numeric}} initial variance for all components (output equation), by default \code{V=1} is taken}
 \item{W}{optional, \code{\link[base]{numeric}} initial value to be put in the diagonal matrix representing the covariance matrices (state equation), by default \code{W=1} is taken}
 \item{atype}{optional, \code{\link[base]{numeric}} indicating approximation of pdf, 0 represents quasi-Bayesian approach, 1 represents minimization of the Kerridge inaccuracy (where suitiable optimization is done with the Gauss-Newton method, still this increases the computation time greatly), by default \code{atype=0} is taken}
+\item{max_vars}{optional, \code{\link[base]{numeric}}. Maximum number of predictors (excluding constant) allowed in component models. Reduces model pool from \eqn{2^k} to \eqn{\sum_{i=0}^{\texttt{max\_vars}} \binom{k}{i}}.}
 }
 
 \value{object of class {\code{mixest}}, i.e., {\code{\link[base]{list}}} of 

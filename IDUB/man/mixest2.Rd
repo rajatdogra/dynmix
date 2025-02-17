@@ -20,6 +20,7 @@ mixest2(y,x,mods=NULL,ftype=NULL,V=NULL,W=NULL,atype=NULL,Tvar=NULL)
 \item{W}{optional, \code{\link[base]{numeric}} initial value to be put in the diagonal  matrix representing the covariance matrices for regression coefficients, the same for all components, by default \code{W=1} is taken}
 \item{atype}{optional, \code{\link[base]{numeric}} indicating approximation of pdfs, 0 represents quasi-Bayesian approach, 1 represents minimization of the Kerridge inaccuracy, by default \code{atype=0} is taken}
 \item{Tvar}{optional, \code{\link[base]{numeric}} indicating the number of first observations, when variance and covariance updating will not be performed, i.e., the initial values will be kept fixed, by default \code{Tvar=30} is taken}
+\item{max_vars}{optional, \code{\link[base]{numeric}}. Maximum number of predictors (excluding constant) allowed in component models. Reduces model pool from \eqn{2^k} to \eqn{\sum_{i=0}^{\texttt{max\_vars}} \binom{k}{i}}.}
 }
 
 \value{object of class {\code{mixest}}, i.e., {\code{\link[base]{list}}} of 

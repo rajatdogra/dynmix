@@ -6,7 +6,7 @@
 ### DOI:10.1002/acs.1239
 
 
-.mixest2b <- function(y,x,mods=NULL,ftype=NULL,V=NULL,W=NULL,Tvar=NULL)
+.mixest2b <- function(y,x,mods=NULL,ftype=NULL,V=NULL,W=NULL,Tvar=NULL, max_vars = NULL)
   {
     if (is.null(ftype)) { ftype <- 1 }
     
@@ -15,11 +15,21 @@
         colnames(x) <- colnames(x,do.NULL=FALSE,prefix="X")
       }
     
-    if (is.null(mods))
-      {
-        mods <- expand.grid(rep.int(list(0:1),ncol(x)))
-        mods <- as.matrix(cbind(rep.int(1,nrow(mods)),mods))
-      }
+    if (is.null(mods)) {
+        # Generate all possible models (0/1 for each predictor)
+        all_mods <- expand.grid(rep.int(list(0:1), ncol(x)))
+        
+        # Apply max_vars constraint
+        if (!is.null(max_vars)) {
+            var_counts <- rowSums(all_mods)
+            all_mods <- all_mods[var_counts <= max_vars, , drop = FALSE]
+        }
+        
+        # Add constant term and set column names
+        mods <- as.matrix(cbind(1, all_mods))
+        colnames(mods) <- c("const", colnames(x))
+    }
+
     if (is.null(V)) { V <- 1 }
     if (is.null(W)) { W <- 1 }
 

@@ -6,7 +6,8 @@
 ### DOI:10.1016/j.apm.2013.05.038
 
 
-mixest1 <- function(y,x,mods=NULL,ftype=NULL,lambda=NULL,kappa=NULL,V=NULL,W=NULL,atype=NULL)
+mixest1 <- function(y,x,mods=NULL,ftype=NULL,lambda=NULL,kappa=NULL,V=NULL,W=NULL,atype=NULL,
+                    max_vars = NULL)   # Max variables per model (excluding constant)
   {
     if (is.null(lambda) && is.null(kappa))
       {
@@ -27,11 +28,21 @@ mixest1 <- function(y,x,mods=NULL,ftype=NULL,lambda=NULL,kappa=NULL,V=NULL,W=NUL
         colnames(x) <- colnames(x,do.NULL=FALSE,prefix="X")
       }
     
-    if (is.null(mods))
-      {
-        mods <- expand.grid(rep.int(list(0:1),ncol(x)))
-        mods <- as.matrix(cbind(rep.int(1,nrow(mods)),mods))
-      }
+    if (is.null(mods)) {
+        # Generate all possible models (0/1 for variable inclusion)
+        all_mods <- expand.grid(rep.int(list(0:1), ncol(x)))
+        
+        # Apply sparsity constraint if max_vars is specified
+        if (!is.null(max_vars)) {
+            var_counts <- rowSums(all_mods)
+            all_mods <- all_mods[var_counts <= max_vars, , drop = FALSE]
+        }
+
+        # Add constant term to all models
+        mods <- as.matrix(cbind(1, all_mods))
+        colnames(mods) <- c("const", colnames(x))
+
+    }
     if (is.null(V)) { V <- 1 }
     if (is.null(W)) { W <- 1 }
 
