@@ -2,7 +2,7 @@
 ### Extension of Nagy & Suzdaleva (2013) with genetic algorithms
 ### for component selection and sparsity-inducing priors
 
-source("IDUB/R/mixest1.R")  # Import original mixest1 function
+source("/Users/rajat/Documents/UW-Application/UW-Studies/research/code-repo/dynmix/IDUB/R/mixest1.R")  # Import original mixest1 function
 
 mixest1_ga <- function(y, x, 
                       population_size = 30,
