@@ -18,3 +18,4 @@ License: GPL-3
 LazyData: TRUE 
 URL: https://CRAN.R-project.org/package=dynmix 
 Note: Ver. 1.0: The author obtained financial resources as part of financing the doctoral scholarship from the Polish National Science Centre (DEC-2018/28/T/HS4/00095). Ver. 2.0: The research was supported by the program ''Excellence Initiative - Research University (IDUB)'' through the project BOB-IDUB-622-89/2021 - Nowe Idee POB III IDUB, 01/IDUB/2019/94 at the University of Warsaw, Poland. 
+RoxygenNote: 7.3.2
